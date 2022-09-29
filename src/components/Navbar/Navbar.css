@@ -1,0 +1,25 @@
+.Nav {
+    height: 150px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: dimgray;
+    opacity: 0.9;
+}
+.Nav__logo {
+    width: 120px;
+    border-radius: 50%;
+    box-shadow: 0 0 100px #555;
+}
+.Nav__bar {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 100%;
+    width: 350px;
+}
+button {
+    border-style: none;
+    background-color: dimgray;
+    font-size: 1.5rem;
+}
