@@ -1,25 +1,25 @@
 import './Navbar.css'
 import logo from './logo/logo.jpg'
 import Cart from '../CartWidget/Cart'
+import { Link } from 'react-router-dom'
 
 const Navbar = () => {
     return (
         <header className='Nav'>
+            <Link to={'/'}>
                 <img 
                 className='Nav__logo'
                 src={logo} 
                 alt='Punto Verde logo' 
-                />             
+                />
+            </Link>                 
             <nav className='Nav__bar'>
-                <button>
+                <Link to={'/categories/fruta'}>
                     Frutas
-                </button>
-                <button>
+                </Link>
+                <Link to={'/categories/verdura'}>
                     Verduras
-                </button>
-                <button>
-                    Combos
-                </button>
+                </Link>
             </nav>
             <Cart/>   
         </header>
