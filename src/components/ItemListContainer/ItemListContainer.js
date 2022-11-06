@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import './ItemListContainer.css'
-import { getProducts, getProductsCategory } from "../../asyncMock"
+import { getDocs, collection, query, where } from "firebase/firestore" 
+import { db } from "../../services/firebase"
 import ItemList from '../ItemList/ItemList'
 import { useParams } from "react-router-dom"
 
@@ -9,18 +10,26 @@ const ItemListContainer = ({greeting}) => {
     const [products, setProducts] = useState([])
     const [loader, setLoader] = useState(true)
 
-    const {category} = useParams()
+    const {categoryId} = useParams()
 
     useEffect (() => {
         setLoader(true)
 
-        const functionAsync = category ? getProductsCategory : getProducts
+        const collectionDb = categoryId ? query(collection(db, 'products'), where('category', '==', categoryId)) : collection(db, 'products')
         
-        functionAsync(category)
-        .then( resp => setProducts(resp) )
+        getDocs(collectionDb)
+        .then( resp => {
+            console.log(resp)
+            console.log(resp.docs)
+            let productsAdapted = resp.docs.map( doc => {
+                const data = doc.data()
+                
+                return {id: doc.id, ...data}})
+            setProducts(productsAdapted)
+        })
         .catch( err => console.log(err) )
         .finally( () => setLoader(false) )
-    }, [category])
+    }, [categoryId])
     
     if(loader) {
         return (

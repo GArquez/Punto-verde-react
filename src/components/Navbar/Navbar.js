@@ -1,6 +1,6 @@
 import './Navbar.css'
 import logo from './logo/logo.jpg'
-import Cart from '../CartWidget/Cart'
+import CartWidget from '../CartWidget/CartWidget'
 import { Link } from 'react-router-dom'
 
 const Navbar = () => {
@@ -21,7 +21,7 @@ const Navbar = () => {
                     Verduras
                 </Link>
             </nav>
-            <Cart/>   
+            <CartWidget />   
         </header>
     )
 }

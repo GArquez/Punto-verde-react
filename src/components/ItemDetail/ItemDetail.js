@@ -1,14 +1,21 @@
 import './ItemDetail.css'
 import Counter from '../Counter/Counter'
+import { useContext } from 'react'
+import { CartContext } from '../../Context/Context'
 
 
-const ItemDetail = ({id, name, price, category, img, description}) => {
+const ItemDetail = ({id, name, price, category, img, description, stock}) => {
 
-    const handleAdd = () => {
+    const { addProduct, getQuantityOfProduct } = useContext(CartContext)
+
+    const quantitySelected = getQuantityOfProduct(id)
+
+    const handleAdd = (quantity) => {
         const productToAdd = {
-            id, name, price
+            id, name, price, quantity
         }
-        console.log(productToAdd)
+
+        addProduct(productToAdd, quantity)
     }
 
     return (
@@ -38,7 +45,7 @@ const ItemDetail = ({id, name, price, category, img, description}) => {
                 </article>
             </main>
             <footer>
-                <Counter Add={handleAdd} />
+                <Counter Add={handleAdd} stock={stock} initial={quantitySelected} />
             </footer>
         </div>
     )

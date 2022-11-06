@@ -1,19 +1,19 @@
 import { useState } from "react"
 import './Counter.css'
 
-const Counter = ({ Add, initial = 1 }) => {
+const Counter = ({ stock, Add, initial = 1 }) => {
 
     
     const [quantity, setQuantity] = useState(initial)
 
     const sumar = () => {
-        if (quantity >= 0) {
+        if (quantity < stock) {
             setQuantity(quantity + 1)
         }
     }
 
     const restar = () => {
-        if (quantity > 0) {
+        if (quantity > 1) {
             setQuantity(quantity - 1)
         }
     }
@@ -26,7 +26,7 @@ const Counter = ({ Add, initial = 1 }) => {
                 <button className="Button" onClick={sumar}>+</button>
             </div>
             <div>
-                <button className="Button" onClick={() => Add()}>Agregar al carrito</button>
+                <button className="Button" onClick={() => Add(quantity)}>Agregar al carrito</button>
             </div>
        </div>
     )
